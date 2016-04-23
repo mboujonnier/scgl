@@ -39,21 +39,37 @@ scgl_graph_destroy(scgl_graph_t **graph, attr_function fun) {
 	scgl_vertex_t *v;
 	list_head_t *i, *j;
 
-	if (graph != NULL && *graph != NULL) {
-		list_for_each_safe(i, j, &(*graph)->edges) {
+	printf("scgl_graph_destroy\n");
+	
+	if (graph != NULL && *graph != NULL) 
+	{
+		printf("scgl_graph_destroy list edges\n");
+		list_for_each_safe(i, j, &(*graph)->edges) 
+		{
 			e = list_entry(i, scgl_edge_t, owner_list);
+			printf("scgl_graph_destroy call destroy edges\n");
 			scgl_edge_destroy(&e, fun);
 		}
 
-		list_for_each_safe(i, j, &(*graph)->vertexes) {
+		printf("scgl_graph_destroy list vertices\n");
+		list_for_each_safe(i, j, &(*graph)->vertexes) 
+		{
 			v = list_entry(i, scgl_vertex_t, owner_list);
 			scgl_vertex_destroy(&v);
 		}
 
-		free((*graph)->id);
-		(*graph)->id = NULL;
+		printf("scgl_graph_destroy free graph id\n");
+		if((*graph)->id != NULL)
+		{
+			//free((*graph)->id);
+			(*graph)->id = NULL;
+		}
+		
+		printf("scgl_graph_destroy free graph\n");
 		free(*graph);
 		*graph = NULL;
+		
+		printf("scgl_graph_destroy DONE\n");
 	}
 }
 

@@ -40,24 +40,43 @@ void
 scgl_vertex_destroy(scgl_vertex_t **vertex) {
 	list_head_t *i, *j;
 	scgl_edge_t *tmp;
-
-	if (vertex != NULL && *vertex != NULL) {
-		list_for_each_safe(i, j, &(*vertex)->in) {
+	
+	printf("scgl_vertex_destroy\n");
+	
+	if (vertex != NULL && *vertex != NULL) 
+	{
+		printf("scgl_vertex_destroy list in\n");
+		list_for_each_safe(i, j, &(*vertex)->in) 
+		{
+			printf("scgl_vertex_destroy calling del edge for in\n");
 			tmp = list_entry(i, scgl_edge_t, to_list);
-			scgl_vertex_del_edge(*vertex, tmp);
+			//scgl_vertex_del_edge(*vertex, tmp);
+			scgl_edge_destroy(&tmp, NULL);
 		}
 
+		printf("scgl_vertex_destroy list out\n");
 		list_for_each_safe(i, j, &(*vertex)->out) {
+			printf("scgl_vertex_destroy calling del edge for out\n");
 			tmp = list_entry(i, scgl_edge_t, from_list);
-			scgl_vertex_del_edge(*vertex, tmp);
+			//scgl_vertex_del_edge(*vertex, tmp);
+			scgl_edge_destroy(&tmp, NULL);
 		}
 
+		printf("scgl_vertex_destroy list del owner\n");
 		list_del(&(*vertex)->owner_list);
-
-		free((*vertex)->id);
-		(*vertex)->id = NULL;
+		
+		printf("scgl_vertex_destroy free vertex id %s\n", (*vertex)->id);
+		if((*vertex)->id != NULL)
+		{
+			//free((*vertex)->id);
+			(*vertex)->id = NULL;
+		}
+		
+		printf("scgl_vertex_destroy free vertex\n");
 		free(*vertex);
 		*vertex = NULL;
+		
+		printf("scgl_vertex_destroy DONE\n");
 	}
 }
 

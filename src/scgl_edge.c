@@ -72,6 +72,8 @@ scgl_edge_destroy_sibling(scgl_edge_t **edge) {
 		if ((*edge)->from != NULL)
 			list_del(&(*edge)->from_list);
 
+		printf("scgl_edge_destroy_sibling free edge\n");
+
 		free(*edge);
 		*edge = NULL;
 	}
@@ -82,6 +84,8 @@ scgl_edge_destroy(scgl_edge_t **edge, attr_function fun) {
 	scgl_attr_t *tmp;
 	list_head_t *i, *j;
 
+	printf("scgl_edge_destroy\n");
+	
 	if (edge != NULL && *edge != NULL) {
 		if ((*edge)->to != NULL)
 			list_del(&(*edge)->to_list);
@@ -96,6 +100,8 @@ scgl_edge_destroy(scgl_edge_t **edge, attr_function fun) {
 		}
 
 		scgl_edge_destroy_sibling(&(*edge)->sibling);
+	
+		printf("scgl_edge_destroy free edge\n");
 
 		free(*edge);
 		(*edge) = NULL;

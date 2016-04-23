@@ -19,16 +19,34 @@ scgl_attr_create(char *key, void *value) {
 
 void
 scgl_attr_destroy(scgl_attr_t **attr, attr_function fun) {
-	if (attr != NULL && *attr != NULL) {
+	
+	printf("scgl_attr_destroy\n");
+	
+	if (attr != NULL && *attr != NULL) 
+	{
+		printf("scgl_attr_destroy checking fun\n");
 		if (fun != NULL)
+		{
+			printf("scgl_attr_destroy calling fun\n");
 			(*fun)((*attr)->key, (*attr)->value, NULL);
+		}
+		else
+		{
+			printf("scgl_attr_destroy without calling fun\n");
+		}
+		
+		printf("scgl_attr_destroy cleaning\n");
 		list_del(&(*attr)->list);
-		free((*attr)->key);
+		
+		// not malloced
+		//free((*attr)->key);
 		(*attr)->key = NULL;
 		(*attr)->value = NULL;
 		free(*attr);
 		*attr = NULL;
 	}
+	else
+		printf("scgl_attr_destroy attr is null\n");
 }
 
 char*
