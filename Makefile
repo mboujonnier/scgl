@@ -1,6 +1,6 @@
 TOPDIR=./
 CC:=gcc
-CFLAGS:=-I$(TOPDIR)include/ -I/usr/include/igraph -s -Os -Wall -pedantic -std=c99
+CFLAGS:=-I$(TOPDIR)include/ -I/usr/include/igraph -s -Os -Wall -pedantic -std=c99 -Wno-unused-but-set-variable
 CXX=g++
 CXXFLAGS:=-s -Os -Wall -pedantic
 LDFLAGS:=-ligraph
@@ -52,7 +52,7 @@ endif
 
 .PHONY: all clean tests scgl
 
-all: scgl
+all: scgl ex
 
 scgl: $(OBJECTS)
 	@echo "Linking object files into $(TOPDIR)lib/libscgl.a library"
@@ -69,9 +69,17 @@ tests: scgl
 	@echo "Running DejaGNU tests"
 	runtest --tool scgl TEST_APP=$(TOPDIR)unit_tests/scgl.test/tests.out --srcdir=$(TOPDIR)unit_tests/ --outdir=$(TOPDIR)unit_tests/ --all test.exp
 
+ex: scgl
+	@echo "Building examples"
+	@$(CC) $(CFLAGS) $(MFLAGS) $(TOPDIR)examples/ex.c -o $(TOPDIR)examples/ex $(TOPDIR)lib/libscgl.a
+
+leaktest: scgl ex
+	valgrind --leak-check=full -v examples/ex
+
 clean::
 	@echo "Removing object (src/), library (lib/), and DejaGNU's test files"
 	@rm -rf $(TOPDIR)src/*.o
 	@rm -rf $(TOPDIR)lib/libscgl.a
 	@rm -rf $(TOPDIR)unit_tests/scgl.test/tests.out
 	@rm -rf $(TOPDIR)unit_tests/scgl.log $(TOPDIR)unit_tests/scgl.sum
+	@rm -rf $(TOPDIR)examples/ex
