@@ -41,7 +41,7 @@ scgl_vertex_destroy(scgl_vertex_t **vertex) {
 	list_head_t *i, *j;
 	scgl_edge_t *tmp;
 	
-	printf("scgl_vertex_destroy\n");
+	//printf("scgl_vertex_destroy\n");
 	
 	if (vertex != NULL && *vertex != NULL) 
 	{
