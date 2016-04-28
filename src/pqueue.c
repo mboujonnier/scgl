@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#include "pqueue.h"
+#include "scgl/pqueue.h"
 
 #define LEFT(x) (2 * (x) + 1)
 #define RIGHT(x) (2 * (x) + 2)
