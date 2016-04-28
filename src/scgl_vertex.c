@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "scgl_edge.h"
-#include "scgl_vertex.h"
+#include "scgl.h"
+
 
 scgl_vertex_t*
 scgl_vertex_create(char *id, scgl_edge_t **in, unsigned int in_n, scgl_edge_t **out, unsigned int out_n) {

@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#include "scgl_def.h"
+#include "scgl/scgl_def.h"
 
 /**
  * a function for operate at vertex's edges

@@ -5,8 +5,8 @@
 extern "C" {
 #endif
 
-#include "list.h"
-#include "scgl_def.h"
+#include "scgl/list.h"
+#include "scgl/scgl_def.h"
 
 /**
  * definiton of edge cost attribute type

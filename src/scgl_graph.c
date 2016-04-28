@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "list.h"
-#include "scgl_attr.h"
-#include "scgl_vertex.h"
-#include "scgl_graph.h"
+
+#include "scgl.h"
+
 
 scgl_graph_t*
 scgl_graph_create(char *id, scgl_vertex_t **vertexes, unsigned int vertexes_n, scgl_edge_t **edges, unsigned int edges_n) {

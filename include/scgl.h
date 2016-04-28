@@ -5,11 +5,13 @@
 extern "C" {
 #endif
 
-#include "scgl_edge.h"
-#include "scgl_vertex.h"
-#include "scgl_graph.h"
-#include "scgl_attr.h"
-#include "scgl_algorithms.h"
+#include "scgl/scgl_edge.h"
+#include "scgl/scgl_vertex.h"
+#include "scgl/scgl_graph.h"
+#include "scgl/scgl_attr.h"
+#include "scgl/scgl_algorithms.h"
+#include "scgl/list.h"
+#include "scgl/pqueue.h"
 
 #ifdef __cplusplus
 }

@@ -3,12 +3,9 @@
 #include <limits.h>
 #include <float.h>
 #include <assert.h>
-#include "list.h"
-#include "scgl_graph.h"
-#include "scgl_vertex.h"
-#include "scgl_edge.h"
-#include "scgl_algorithms.h"
-#include "pqueue.h"
+
+#include "scgl.h"
+
 
 typedef struct pair {
 	unsigned int id;

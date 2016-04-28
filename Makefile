@@ -6,6 +6,12 @@ CXXFLAGS:=-s -Os -Wall -pedantic
 LDFLAGS:=-ligraph
 MFLAGS:=
 COST_TYPE:=ui
+
+DESTDIR = 
+PREFIX = usr/local
+
+HEADERS = include/scgl.h include/scgl         
+         
 SOURCES:=$(sort \
            $(TOPDIR)src/pqueue.c \
            $(TOPDIR)src/scgl_attr.c \
@@ -76,7 +82,18 @@ ex: scgl
 leaktest: scgl ex
 	valgrind --leak-check=full -v examples/ex
 
-clean::
+install: scgl
+	mkdir -p $(DESTDIR)/$(PREFIX)/lib
+	mkdir -p $(DESTDIR)/$(PREFIX)/include
+	cp $(TOPDIR)lib/libscgl.a $(DESTDIR)/$(PREFIX)/lib
+	cp -R $(HEADERS) $(DESTDIR)/$(PREFIX)/include/
+
+uninstall:
+	rm -f $(DESTDIR)/$(PREFIX)/lib/libscgl.a
+	rm -f $(DESTDIR)/$(PREFIX)/include/scgl.h
+	rm -f $(DESTDIR)/$(PREFIX)/include/scgl
+
+clean:
 	@echo "Removing object (src/), library (lib/), and DejaGNU's test files"
 	@rm -rf $(TOPDIR)src/*.o
 	@rm -rf $(TOPDIR)lib/libscgl.a

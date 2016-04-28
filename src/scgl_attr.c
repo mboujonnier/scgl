@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "scgl_attr.h"
+#include "scgl.h"
 
 scgl_attr_t*
 scgl_attr_create(char *key, void *value) {
